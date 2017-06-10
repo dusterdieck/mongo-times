@@ -17,9 +17,10 @@ function populateArticles() {
 }
 
 function addArticle( article ) {
-  let newsUrl = 'http://m.mlb.com';
+  let id = Date.now()
   let newArticle = $('<div/>');
   newArticle.addClass('panel panel-info')
+            .addClass(''+id);
 
   let heading = $('<div/>');
   heading.addClass('panel-heading');
@@ -38,7 +39,7 @@ function addArticle( article ) {
     blurb.append(paragraph);
   }
   let linkButton = $('<a/>')
-  linkButton.attr('href', newsUrl + article.link)
+  linkButton.attr('href', article.link)
             .addClass('btn btn-primary')
             .text('Continue Reading');
   blurb.append(linkButton)
@@ -48,7 +49,7 @@ function addArticle( article ) {
   buttonDiv.addClass('col-sm-3');
   let saveButton = $('<button/>')
   saveButton.addClass('btn btn-success save')
-            .attr('id', Date.now())
+            .attr('id', id)
             .text('Save');
   buttonDiv.append(saveButton);
   body.append(buttonDiv);
@@ -56,4 +57,10 @@ function addArticle( article ) {
   newArticle.append(heading)
             .append(body);
   $('#articles').append(newArticle);
+}
+
+
+function saveArticle() {
+  let id = $(this).attr(id);
+  let 
 }

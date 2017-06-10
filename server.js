@@ -61,7 +61,7 @@ app.get("/scrape", function(req, res) {
       // result.title = $(this).children("a").text().trim();
       // result.link = $(this).children("a").attr("href");
       result.title = $(this).attr('data-title');
-      result.link = $(this).attr("data-url");
+      result.link = 'http://m.mlb.com' + $(this).attr("data-url");
       result.blurb = $(this).children("section").children('.blurb').text().trim().split('\n');
       console.log('result', i, '=', result.title)
       scrapedArticles.push(result);
