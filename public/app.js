@@ -1,6 +1,6 @@
 // Grab the articles as a json
 $('#scraper').on('click', populateArticles );
-
+$(document).on('click', '.save', saveArticle);
 function populateArticles() {
   
   event.preventDefault();
@@ -16,7 +16,7 @@ function populateArticles() {
   });  
 }
 
-function addArticle( article ) {
+function addArticle(article){
   let id = Date.now()
   let newArticle = $('<div/>');
   newArticle.addClass('panel panel-info')
@@ -61,6 +61,11 @@ function addArticle( article ) {
 
 
 function saveArticle() {
-  let id = $(this).attr(id);
-  let 
+  let id = $(this).attr('id');
+  let article = $('.' + id);
+  let saveObject = {};
+  saveObject.title = article.children('.panel-heading').text();
+  saveObject.link = article.children('.panel-body').children('.col-sm-9').children('a').attr('href');
+  console.log(saveObject);
+  $.post('/articles', saveObject);
 }
