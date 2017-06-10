@@ -1,44 +1,59 @@
 // Grab the articles as a json
-$.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < data.length; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-  }
-});
+$('#scraper').on('click', populateArticles );
 
-populateArticles = function( articles ) {
-  $('#articles').empty();
-  let newsUrl = 'http://m.mlb.com';
-  for(let i = 0; i < articles.length; i++) {
+function populateArticles() {
+  
+  event.preventDefault();
+  console.log('clicked') 
 
-    let newArticle = $('<div>');
-    newArticle.addClass('panel panel-info')
-
-    let heading = $('<div>');
-    heading.addClass('panel-heading');
-    let title = $('<h3>');
-    title.addClass('panel-title')
-         .text( articles[i].title );
-    heading.append(title);
-
-    let body = $('<div>');
-    body.addClass('panel-body')
-    let blurb = $('div');
-    blurb.addClass('col-sm-9');
-    for(let j = 0; j < (articles.blurb.length -2 ); j++){
-      let paragraph = $('<p>');
-      paragraph.text( articles.blurb[j] )
-      blurb.append(paragraph);
-    }
-    let linkButton = $('<a>')
-    linkButton.attr('href', newsURL + articles[i].link)
-              .addClass('btn btn-primary')
-              .text('Continue Reading');
-    blurb.append(linkButton)
-    body.append(blurb);
-
-    let 
+  $.getJSON("/scrape", function(articles) {
+    console.log('articles', articles)
+    $('#articles').empty();
     
+    for(let i = 0; i < articles.length; i++) {
+      addArticle( articles[i] );
+    }
+  });  
+}
+
+function addArticle( article ) {
+  let newsUrl = 'http://m.mlb.com';
+  let newArticle = $('<div/>');
+  newArticle.addClass('panel panel-info')
+
+  let heading = $('<div/>');
+  heading.addClass('panel-heading');
+  let title = $('<h3/>');
+  title.addClass('panel-title')
+       .text( article.title );
+  heading.append(title);
+
+  let body = $('<div/>');
+  body.addClass('panel-body row')
+  let blurb = $('<div/>');
+  blurb.addClass('col-sm-9');
+  for(let j = 0; j < (article.blurb.length -2 ); j++){
+    let paragraph = $('<p/>');
+    paragraph.text( article.blurb[j] );
+    blurb.append(paragraph);
   }
+  let linkButton = $('<a/>')
+  linkButton.attr('href', newsUrl + article.link)
+            .addClass('btn btn-primary')
+            .text('Continue Reading');
+  blurb.append(linkButton)
+  body.append(blurb);
+
+  let buttonDiv = $('<div/>')
+  buttonDiv.addClass('col-sm-3');
+  let saveButton = $('<button/>')
+  saveButton.addClass('btn btn-success save')
+            .attr('id', Date.now())
+            .text('Save');
+  buttonDiv.append(saveButton);
+  body.append(buttonDiv);
+
+  newArticle.append(heading)
+            .append(body);
+  $('#articles').append(newArticle);
 }

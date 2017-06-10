@@ -16,6 +16,7 @@ mongoose.Promise = Promise;
 // Initialize Express
 var app = express();
 
+const PORT = process.env.PORT || 3001;
 // Use morgan and body parser with our app
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
@@ -62,13 +63,16 @@ app.get("/scrape", function(req, res) {
       result.title = $(this).attr('data-title');
       result.link = $(this).attr("data-url");
       result.blurb = $(this).children("section").children('.blurb').text().trim().split('\n');
-
+      console.log('result', i, '=', result.title)
       scrapedArticles.push(result);
 
     });
+    console.log('--------- SCRAPED --------', scrapedArticles);
+    res.send(scrapedArticles);
   });
+  
   // Tell the browser that we finished scraping the text
-  res.send(scrapedArticles);
+  
 });
 
 // This will get the articles we scraped from the mongoDB
@@ -150,6 +154,6 @@ app.post("/articles/:id", function(req, res) {
 
 
 // Listen on port 3000
-app.listen(3000, function() {
-  console.log("App running on port 3000!");
+app.listen(PORT, function() {
+  console.log("App running on port", PORT);
 });
