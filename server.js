@@ -75,7 +75,7 @@ app.get("/scrape", function(req, res) {
   
 });
 
-// This will get the articles we scraped from the mongoDB
+// This will get the articles we saved to the mongoDB
 app.get("/articles", function(req, res) {
   // Grab every doc in the Articles array
   Article.find({}, function(error, doc) {
@@ -90,7 +90,7 @@ app.get("/articles", function(req, res) {
   });
 });
 
-// This will get the articles we scraped from the mongoDB
+// This will save articles to the mongoDB
 app.post("/articles", function(req, res) {
   // Grab every doc in the Articles array
   Article.create(req.body, function(error, doc) {
@@ -105,7 +105,7 @@ app.post("/articles", function(req, res) {
   });
 });
 
-// Grab an article by it's ObjectId
+// Grab an article by its ObjectId
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   Article.findOne({ "_id": req.params.id })
@@ -152,6 +152,13 @@ app.post("/articles/:id", function(req, res) {
   });
 });
 
+app.delete('/articles/:id', function(req, res) {
+  Article.remove({ _id: req.params.id }, function(err) {
+    if (err) res.sendStatus(500);
+    
+    res.send('Success!');
+});
+})
 
 // Listen on port 3000
 app.listen(PORT, function() {

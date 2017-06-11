@@ -1,18 +1,15 @@
 // Grab the articles as a json
 $('#scraper').on('click', populateArticles );
 $(document).on('click', '.save', saveArticle);
-
 function populateArticles() {
   
   event.preventDefault();
   console.log('clicked') 
 
   $.getJSON("/scrape", function(articles) {
+    console.log('articles', articles)
     $('#articles').empty();
-
-    $('#modal-content').html('<h3>Scrape Complete</h3>');
-    $('#myModal').modal('show');
-
+    
     for(let i = 0; i < articles.length; i++) {
       addArticle( articles[i] );
     }
@@ -70,8 +67,5 @@ function saveArticle() {
   saveObject.title = article.children('.panel-heading').text();
   saveObject.link = article.children('.panel-body').children('.col-sm-9').children('a').attr('href');
   console.log(saveObject);
-  $.post('/articles', saveObject, function(){
-    $('#modal-content').html('<h3>Article Saved.</h3>')
-    $('#myModal').modal('toggle')
-  });
+  $.post('/articles', saveObject);
 }
