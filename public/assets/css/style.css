@@ -1,0 +1,52 @@
+.jumbotron{
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  /*margin: 0;*/
+  padding: 250px; 
+}
+
+.cinzel-outlined{
+  color: #fff !important;
+  font-family: 'Cinzel', serif !important;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black !important;
+}
+
+nav, .navbar, .navbar-default{
+  margin: 0;
+}
+
+.white{
+  color: #fff;
+}
+
+.red{
+  color: #ff0000;
+}
+
+.vcenter {
+  display: flex;
+  align-items: center;
+}
+
+.delete-note:hover{
+  cursor: pointer;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}

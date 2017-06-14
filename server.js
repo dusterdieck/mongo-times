@@ -138,7 +138,7 @@ app.post("/articles/:id", function(req, res) {
     // Otherwise
     else {
       // Find our user and push the new note id into the User's notes array
-      User.findOneAndUpdate({_id: req.params.id}, { $push: { "notes": doc._id } }, { new: true }, function(err, newdoc) {
+      Article.findOneAndUpdate({_id: req.params.id}, { $push: { "notes": doc._id } }, { new: true }, function(err, newdoc) {
         // Send any errors to the browser
         if (err) {
           res.send(err);
@@ -157,7 +157,15 @@ app.delete('/articles/:id', function(req, res) {
     if (err) res.sendStatus(500);
     
     res.send('Success!');
-});
+  });
+})
+
+app.delete('/notes/:id', function(req, res) {
+  Note.remove({ _id: req.params.id }, function(err) {
+    if (err) res.sendStatus(500);
+    
+    res.send('Success!');
+  });
 })
 
 // Listen on port 3000

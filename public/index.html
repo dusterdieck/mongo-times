@@ -7,30 +7,19 @@
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.slate.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.slate.css">
     
     <!-- font file -->
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/style.css"
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <style>
-      .jumbotron{
-        background-image: url(./assets/images/background.jpg);
-        background-size: cover;
-        /*margin: 0;*/
-        padding: 250px; 
-      }
-      .cinzel-outlined{
-        color: #fff !important;
-        font-family: 'Cinzel', serif !important;
-        text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black !important;
-      }
-      nav, .navbar, .navbar-default{
-        margin: 0;
-      }
+
     </style>
   </head>
   <body>
@@ -75,7 +64,13 @@
 
     <div class="modal fade" tabindex="-1" role="dialog" id='myModal'>
       <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content text-center" id="modal-content">
+        <div class="modal-content text-center" >
+          <div class="modal-body">
+            <div class='row'><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="white glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>
+
+            <div class='row' id="modal-content">
+            </div>
+          </div>
         </div>
       </div>
     </div> <!-- /.modal -->
