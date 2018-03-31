@@ -48,27 +48,38 @@ db.once("open", function() {
 // A GET request to scrape the echojs website
 app.get("/scrape", function(req, res) {
   let scrapedArticles = [];
+  let testobj;
   // First, we grab the body of the html with request
   request("http://m.mlb.com/news/", function(error, response, html) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(html);
     // Now, we grab every h2 within an article tag, and do the following:
     //$("li.article.rail-ad-mini").each(function(i, element) {
-    $(".bam-article").each(function(i, element) {
+
+    $("article").each(function(i, element) {
       // Save an empty result object
+      //console.log($(element).children());
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
       // result.title = $(this).children("a").text().trim();
       // result.link = $(this).children("a").attr("href");
-      result.title = $(this).attr('data-title');
-      result.link = 'http://m.mlb.com' + $(this).attr("data-url");
-      result.blurb = $(this).children("section").children('.blurb').text().trim().split('\n');
-      console.log('result', i, '=', result.title)
+      let pShare = $(element).children('.article-item__meta-container').children('.article-item__share-container').children('.p-share');
+      //testobj = i < 1 ? pShare : testobj
+      //console.log('pshare', pShare);
+      result.title = pShare.attr('data-headline');
+      result.link = pShare.attr("data-link");
+      result.blurb = []
+      $(element).children('.article-item__bottom').children('.article-item__preview').children('p').each(function(j, element){
+        result.blurb.push($(element).text());
+        //console.log($(element).text())
+      });
+      //console.log('result', i, '=', result.title)
       scrapedArticles.push(result);
 
     });
     console.log('--------- SCRAPED --------', scrapedArticles);
+    //console.log(testobj)
     res.send(scrapedArticles);
   });
   

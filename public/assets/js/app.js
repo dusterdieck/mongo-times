@@ -35,7 +35,7 @@ function addArticle(article){
   body.addClass('panel-body row')
   let blurb = $('<div/>');
   blurb.addClass('col-sm-9');
-  for(let j = 0; j < (article.blurb.length -2 ); j++){
+  for(let j = 0; j < (article.blurb.length ); j++){
     let paragraph = $('<p/>');
     paragraph.text( article.blurb[j] );
     blurb.append(paragraph);
